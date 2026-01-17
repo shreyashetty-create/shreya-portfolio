@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Shreya Shetty | AI & Data Science</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root{
+--bg:#050812;
+--glass:rgba(255,255,255,0.08);
+--primary:#7cf5c8;
+--secondary:#7aa2ff;
+--accent:#ff72c9;
+--text:#e9edff;
+--muted:#9aa3d6;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Inter,Segoe UI,sans-serif;
+}
+
+body{
+background:
+radial-gradient(circle at 20% 10%,#0c1640,transparent 40%),
+radial-gradient(circle at 80% 80%,#210b2c,transparent 45%),
+var(--bg);
+color:var(--text);
+overflow-x:hidden;
+}
+
+header{
+position:fixed;
+top:0;
+width:100%;
+height:75px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 70px;
+background:rgba(5,8,18,0.6);
+backdrop-filter:blur(20px);
+z-index:999;
+border-bottom:1px solid rgba(255,255,255,0.05);
+}
+
+header h1{
+color:var(--primary);
+font-size:20px;
+letter-spacing:1px;
+}
+
+header nav a{
+margin-left:28px;
+text-decoration:none;
+color:var(--muted);
+font-size:14px;
+transition:.3s;
+}
+
+header nav a:hover{
+color:var(--primary);
+}
+
+section{
+padding:140px 8vw;
+position:relative;
+}
+
+.hero{
+min-height:100vh;
+display:grid;
+grid-template-columns:1.1fr .9fr;
+align-items:center;
+gap:60px;
+}
+
+.hero h2{
+font-size:62px;
+line-height:1.05;
+background:linear-gradient(90deg,var(--primary),var(--secondary),var(--accent));
+background-size:200%;
+-webkit-background-clip:text;
+color:transparent;
+animation:grad 8s linear infinite;
+}
+
+.hero p{
+margin-top:25px;
+font-size:18px;
+color:var(--muted);
+max-width:620px;
+line-height:1.7;
+}
+
+.hero .cta{
+margin-top:45px;
+display:flex;
+flex-wrap:wrap;
+gap:18px;
+}
+
+.hero button{
+padding:14px 34px;
+border-radius:40px;
+border:none;
+cursor:pointer;
+font-size:15px;
+transition:.4s;
+}
+
+.hero .main{
+background:linear-gradient(135deg,var(--primary),var(--secondary));
+color:#000;
+}
+
+.hero .ghost{
+background:transparent;
+border:1px solid rgba(255,255,255,0.16);
+color:var(--text);
+}
+
+.hero button:hover{
+transform:translateY(-4px);
+box-shadow:0 20px 40px rgba(0,0,0,.4);
+}
+
+.hero-visual{
+position:relative;
+height:520px;
+border-radius:40px;
+overflow:hidden;
+background:rgba(255,255,255,0.03);
+border:1px solid rgba(255,255,255,0.08);
+}
+
+.hero-visual img{
+position:absolute;
+width:100%;
+height:100%;
+object-fit:cover;
+filter:brightness(.85) saturate(1.2);
+}
+
+.hero-visual::after{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(180deg,transparent,#050812);
+}
+
+.badge-row{
+margin-top:25px;
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+}
+
+.badge{
+padding:10px 14px;
+border-radius:999px;
+background:rgba(255,255,255,0.06);
+border:1px solid rgba(255,255,255,0.10);
+color:var(--muted);
+font-size:13px;
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:22px;
+margin-top:-80px;
+padding:60px 8vw;
+}
+
+.stat{
+background:var(--glass);
+backdrop-filter:blur(20px);
+border-radius:26px;
+padding:28px;
+text-align:center;
+border:1px solid rgba(255,255,255,0.06);
+}
+
+.stat h3{
+font-size:36px;
+color:var(--primary);
+}
+
+.stat span{
+color:var(--muted);
+font-size:13px;
+}
+
+.about{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:70px;
+align-items:center;
+}
+
+.about img{
+width:100%;
+border-radius:34px;
+border:1px solid rgba(255,255,255,0.08);
+}
+
+.about h3{
+font-size:42px;
+margin-bottom:18px;
+color:var(--secondary);
+}
+
+.about p{
+color:var(--muted);
+line-height:1.9;
+font-size:15.5px;
+}
+
+.timeline{
+margin-top:28px;
+display:grid;
+gap:18px;
+}
+
+.step{
+display:grid;
+grid-template-columns:120px 1fr;
+gap:26px;
+align-items:center;
+}
+
+.step span{
+color:var(--accent);
+font-size:20px;
+}
+
+.step div{
+background:var(--glass);
+padding:22px;
+border-radius:18px;
+border:1px solid rgba(255,255,255,0.06);
+color:var(--text);
+font-size:14px;
+}
+
+.section-title{
+font-size:44px;
+color:var(--secondary);
+margin-bottom:18px;
+}
+
+.section-subtitle{
+color:var(--muted);
+line-height:1.7;
+margin-bottom:35px;
+max-width:800px;
+}
+
+.skills{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px;
+}
+
+.skill{
+padding:32px;
+border-radius:28px;
+background:linear-gradient(180deg,rgba(255,255,255,.12),rgba(255,255,255,.03));
+transition:.4s;
+border:1px solid rgba(255,255,255,0.06);
+min-height:160px;
+}
+
+.skill:hover{
+transform:translateY(-10px);
+}
+
+.skill h4{
+color:var(--primary);
+margin-bottom:10px;
+font-size:20px;
+}
+
+.skill p{
+color:var(--muted);
+line-height:1.7;
+font-size:14px;
+}
+
+.projects{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:36px;
+}
+
+.project{
+border-radius:34px;
+overflow:hidden;
+background:#0b1230;
+transition:.4s;
+border:1px solid rgba(255,255,255,0.06);
+}
+
+.project img{
+width:100%;
+height:220px;
+object-fit:cover;
+filter:brightness(.88) saturate(1.2);
+}
+
+.project div{
+padding:26px 28px 30px;
+}
+
+.project h4{
+font-size:19px;
+color:var(--text);
+}
+
+.project p{
+margin-top:10px;
+color:var(--muted);
+line-height:1.7;
+font-size:14px;
+}
+
+.project .tags{
+margin-top:14px;
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+}
+
+.tag{
+padding:8px 12px;
+border-radius:999px;
+background:rgba(255,255,255,0.06);
+border:1px solid rgba(255,255,255,0.10);
+color:var(--muted);
+font-size:12px;
+}
+
+.project:hover{
+transform:scale(1.04);
+}
+
+.testimonials{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:26px;
+}
+
+.quote{
+background:var(--glass);
+padding:32px;
+border-radius:28px;
+font-size:15px;
+line-height:1.7;
+color:var(--muted);
+border:1px solid rgba(255,255,255,0.06);
+}
+
+.quote strong{
+color:var(--text);
+display:block;
+margin-bottom:8px;
+font-size:14px;
+}
+
+.gallery{
+display:grid;
+grid-template-columns:repeat(6,1fr);
+grid-auto-rows:160px;
+gap:16px;
+}
+
+.gallery img{
+width:100%;
+height:100%;
+object-fit:cover;
+border-radius:22px;
+border:1px solid rgba(255,255,255,0.06);
+filter:brightness(.9) saturate(1.15);
+}
+
+.gallery img:nth-child(1){
+grid-column:span 3;
+grid-row:span 2;
+}
+
+.gallery img:nth-child(4){
+grid-column:span 2;
+grid-row:span 2;
+}
+
+.contact{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:60px;
+align-items:center;
+}
+
+.contact form{
+background:var(--glass);
+padding:40px;
+border-radius:30px;
+display:flex;
+flex-direction:column;
+gap:18px;
+border:1px solid rgba(255,255,255,0.06);
+}
+
+.contact input,
+.contact textarea{
+padding:14px;
+border-radius:14px;
+border:none;
+background:rgba(255,255,255,.1);
+color:var(--text);
+outline:none;
+}
+
+.contact input::placeholder,
+.contact textarea::placeholder{
+color:rgba(154,163,214,0.75);
+}
+
+.contact button{
+padding:14px;
+border:none;
+border-radius:30px;
+background:linear-gradient(135deg,var(--secondary),var(--primary));
+color:#000;
+cursor:pointer;
+font-weight:600;
+}
+
+.contact button:hover{
+filter:brightness(1.05);
+transform:translateY(-2px);
+transition:.3s;
+}
+
+footer{
+padding:50px;
+text-align:center;
+color:var(--muted);
+background:#04060e;
+border-top:1px solid rgba(255,255,255,0.06);
+}
+
+.reveal{
+opacity:0;
+transform:translateY(80px);
+transition:1s;
+}
+
+.reveal.show{
+opacity:1;
+transform:none;
+}
+
+@keyframes grad{
+0%{background-position:0%}
+100%{background-position:200%}
+}
+
+@media(max-width:900px){
+header{padding:0 24px}
+.hero{grid-template-columns:1fr}
+.stats{grid-template-columns:1fr 1fr}
+.about{grid-template-columns:1fr}
+.contact{grid-template-columns:1fr}
+.gallery{grid-template-columns:repeat(2,1fr)}
+.hero h2{font-size:48px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Shreya Shetty</h1>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#about">Profile</a>
+    <a href="#skills">Expertise</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="hero" id="home">
+  <div>
+    <h2>AI & Data Science Student</h2>
+    <p>
+      I build machine learning solutions, research-driven prototypes, and real-world systems —
+      from medical image classification to robotics + AI workflows and hackathon projects.
+    </p>
+
+    <div class="badge-row">
+      <div class="badge">KJ Somaiya • AI & DS (2nd Year)</div>
+      <div class="badge">TMRT • Marine Robotics</div>
+      <div class="badge">ML • Computer Vision</div>
+      <div class="badge">FinTech • Talk2Trade</div>
+    </div>
+
+    <div class="cta">
+      <button class="main" onclick="document.querySelector('#projects').scrollIntoView({behavior:'smooth'})">
+        View Projects
+      </button>
+      <button class="ghost" onclick="document.querySelector('#contact').scrollIntoView({behavior:'smooth'})">
+        Contact Me
+      </button>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c" alt="AI Visual">
+  </div>
+</section>
+
+<div class="stats">
+  <div class="stat"><h3>93%</h3><span>Research Model Accuracy</span></div>
+  <div class="stat"><h3>TMRT</h3><span>Robotics Team Experience</span></div>
+  <div class="stat"><h3>CV</h3><span>Computer Vision Focus</span></div>
+  <div class="stat"><h3>∞</h3><span>Learning & Iterations</span></div>
+</div>
+
+<section class="about reveal" id="about">
+  <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71" alt="Data Visual">
+  <div>
+    <h3>Engineer Profile</h3>
+    <p>
+      Hi, I’m Shreya Shetty — a 2nd year AI & Data Science student with hands-on experience across
+      machine learning, research, hackathons, and robotics. I enjoy building projects that feel real:
+      measurable results, clean pipelines, and systems that actually work outside a notebook.
+      <br><br>
+      My recent work includes medical image classification (malaria + sickle cells),
+      robotics support at TMRT, and building AI-driven project logic for a trading assistant concept (Talk2Trade).
+    </p>
+
+    <div class="timeline">
+      <div class="step"><span>2024</span><div>Started stronger foundation in AI + DS + technical teams</div></div>
+      <div class="step"><span>2025</span><div>Published research + robotics build experience + hackathons</div></div>
+      <div class="step"><span>2026</span><div>Focused on portfolio projects for ML + quant + real deployments</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="reveal" id="skills">
+  <h3 class="section-title">Expertise</h3>
+  <p class="section-subtitle">
+    Areas I’m actively building in — with real implementation experience through research, robotics,
+    and project work.
+  </p>
+
+  <div class="skills">
+    <div class="skill">
+      <h4>Machine Learning</h4>
+      <p>Supervised learning, evaluation metrics, model iteration, and practical implementation workflows.</p>
+    </div>
+
+    <div class="skill">
+      <h4>Computer Vision</h4>
+      <p>Image preprocessing, classification pipelines, detection concepts, and medical-imaging use cases.</p>
+    </div>
+
+    <div class="skill">
+      <h4>Data Analytics</h4>
+      <p>EDA, feature engineering, statistics basics, and converting raw data into decisions.</p>
+    </div>
+
+    <div class="skill">
+      <h4>Engineering & Tools</h4>
+      <p>Python, APIs, basic backend workflows, project structuring, and clean documentation habits.</p>
+    </div>
+  </div>
+</section>
+
+<section class="projects reveal" id="projects">
+  <div style="grid-column:1/-1;">
+    <h3 class="section-title">Projects</h3>
+    <p class="section-subtitle">
+      A few highlight builds based on what you’ve already done — you can replace images and descriptions anytime.
+    </p>
+  </div>
+
+  <div class="project">
+    <img src="https://picsum.photos/900/500?31" alt="Medical AI">
+    <div>
+      <h4>Medical Image Classification (Research)</h4>
+      <p>
+        Automated detection + classification of malaria and sickle cells using image processing techniques.
+        Achieved ~93% accuracy with low-cost hardware feasibility in mind.
+      </p>
+      <div class="tags">
+        <span class="tag">Computer Vision</span>
+        <span class="tag">Classification</span>
+        <span class="tag">Research</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="project">
+    <img src="https://picsum.photos/900/500?32" alt="Robotics">
+    <div>
+      <h4>TMRT Robotics Contributions</h4>
+      <p>
+        Supported robotics builds + documentation. Worked with prototyping, inventory tracking,
+        and contributed to AI/vision-driven ideas around detection & system planning.
+      </p>
+      <div class="tags">
+        <span class="tag">Robotics</span>
+        <span class="tag">Teamwork</span>
+        <span class="tag">Engineering</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="project">
+    <img src="https://picsum.photos/900/500?33" alt="FinTech">
+    <div>
+      <h4>Talk2Trade (Hackathon Project)</h4>
+      <p>
+        Worked on AI story logic / system behavior planning for a trading assistant concept.
+        Focused on structuring outputs and designing logic that feels usable and consistent.
+      </p>
+      <div class="tags">
+        <span class="tag">FinTech</span>
+        <span class="tag">System Logic</span>
+        <span class="tag">Hackathons</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="testimonials reveal">
+  <div class="quote">
+    <strong>Research Mindset</strong>
+    “Balances experimentation with measurable results — accuracy + practicality both matter.”
+  </div>
+  <div class="quote">
+    <strong>Execution</strong>
+    “Builds projects that are structured, documented, and easy to present.”
+  </div>
+  <div class="quote">
+    <strong>Growth</strong>
+    “Moves fast, learns aggressively, and improves through iteration instead of overthinking.”
+  </div>
+</section>
+
+<section class="gallery reveal">
+  <img src="https://picsum.photos/700/700?101" alt="Gallery 1">
+  <img src="https://picsum.photos/700/700?102" alt="Gallery 2">
+  <img src="https://picsum.photos/700/700?103" alt="Gallery 3">
+  <img src="https://picsum.photos/700/700?104" alt="Gallery 4">
+  <img src="https://picsum.photos/700/700?105" alt="Gallery 5">
+  <img src="https://picsum.photos/700/700?106" alt="Gallery 6">
+</section>
+
+<section class="contact reveal" id="contact">
+  <div>
+    <h3 style="font-size:42px;color:var(--secondary)">Let’s Build Something Real</h3>
+    <p style="color:var(--muted);line-height:1.7;margin-top:10px">
+      Open to internships, hackathons, research collaborations, and engineering projects.
+      If you have something interesting, I’ll reply fast.
+    </p>
+
+    <div style="margin-top:20px;display:grid;gap:10px;color:var(--muted);font-size:14px">
+      <div>📍 Mumbai, India</div>
+      <div>🧠 AI • Data Science • Computer Vision</div>
+      <div>⚡ Interested in Quant + Trading Systems</div>
+    </div>
+  </div>
+
+  <form onsubmit="event.preventDefault(); alert('Message sent! (demo)')">
+    <input placeholder="Your Name" required>
+    <input placeholder="Your Email" type="email" required>
+    <textarea rows="4" placeholder="Your Message" required></textarea>
+    <button type="submit">Send</button>
+  </form>
+</section>
+
+<footer>
+  © 2026 Shreya Shetty • AI & Data Science
+</footer>
+
+<script>
+const r = document.querySelectorAll('.reveal');
+
+window.addEventListener('scroll', () => {
+  r.forEach(e => {
+    if (e.getBoundingClientRect().top < innerHeight - 120) {
+      e.classList.add('show');
+    }
+  });
+});
+
+// reveal on load for above-the-fold sections
+window.dispatchEvent(new Event('scroll'));
+</script>
+
+</body>
+</html>
